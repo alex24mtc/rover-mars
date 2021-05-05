@@ -12,6 +12,6 @@ export interface Coordinates{
 export interface Rover{
     direction: 'L' | 'R' | 'A' //Direction;
     orientation: 'N' | 'E' | 'S' | 'W';
-    cooordinates:Coordinates; //initial coordinates
+    coordinates:Coordinates; //initial coordinates
     successTrip: boolean; //indicates if its was succesfull trip or not
 }
