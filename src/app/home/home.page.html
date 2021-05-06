@@ -13,8 +13,24 @@
   </ion-toolbar>
   </ion-header>
   
+  <h3>Choose the dimension of the square</h3>
+  <label for="width">Width</label>
   <input id="width" name="width" [(ngModel)]="width" type="number" min="0" max="999" value="100">
+  <label for="height">Height</label>
   <input id="heigth" name="height" [(ngModel)]="height" type="number" min="0" max="999" value="100">
+
+  <h3>Choose the rover properties</h3>
+  <label for="orientation">Orientation</label>
+  <input type="text" name="orientation">
+  <label for="direction">Direction</label>
+  <input type="text" name="direction">
+  <label for="coordX">Coordenate X</label>
+  <input type="number" name="coordX">
+  <label for="coordY">Coordenate Y</label>
+  <input type="number" name="coordY">
+
+  <h3>Choose the commands to follow (L,R or A)</h3>
+  <input type="text" name="commands">
   
   <p>Width: {{width}} Height: {{height}}</p>
   

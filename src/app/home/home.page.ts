@@ -32,6 +32,10 @@ valueWidth;
 height = 100;
 valueHeight;
 orientacion;
+heightInitial;
+widthInitial;
+orientationInitial;
+orders;
 
 constructor( private helper:HelpersService) {
 
@@ -62,6 +66,24 @@ getLeft(){
 }
 
 
+startTrip(){
+    const ordersArray = Array.from(this.orders.toUpperCase()) as ( 'L'| 'A' | 'R' )[]
+    console.log('ordersArray', {
+    orders: ordersArray,
+    orientationInitial : this.orientationInitial, heightInitial: this.heightInitial, widthInitial: this.widthInitial
+    })
+    
+    this.helper.trip(ordersArray, {
+    successTrip: true,
+    orientation: this.orientationInitial.toUpperCase(),
+    coordinates: {
+    xWidth: parseInt(this.widthInitial),
+    yHeight: parseInt(this.heightInitial)
+    },
+    direction: ordersArray[0]
+    }, this.mars)
+    
+    }
 
 
 
