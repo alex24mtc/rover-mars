@@ -21,7 +21,7 @@
 
   <h3>Choose the rover properties</h3>
   <label for="orientation">Orientation</label>
-  <input type="text" name="orientation">
+  <input type="text" name="orientation" [(ngModel)]=orientationInitial>
   <label for="direction">Direction</label>
   <input type="text" name="direction">
   <label for="coordX">Coordenate X</label>
@@ -34,10 +34,12 @@
   
   <p>Width: {{width}} Height: {{height}}</p>
   
+  <button (click)="startTrip()">START</button>
+  
   <div class="square" [style.width]='getWidth()' [style.height]='getHeight()'>
   
   <!-- Aqui irá el componente Rover -->
-  <app-rover class="rover" [orientacion]="orientacion"  [style.left]="'40px'" [style.bottom]="'40px'">
+  <app-rover class="rover" [orientacion]="orientacion"  [style.left]="getLeft()" [style.bottom]="getBottom()">
 
 
 

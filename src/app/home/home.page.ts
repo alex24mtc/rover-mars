@@ -1,13 +1,14 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { HelpersService } from '../services/helpers.service';
 import { Rover, Square } from '../interfaces/interfaces';
+import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 
 @Component({
 selector: 'app-home',
 templateUrl: 'home.page.html',
 styleUrls: ['home.page.scss'],
 })
-export class HomePage {
+export class HomePage implements OnInit {
 
 arrayOrders = ['L','A','A','R','A','R','A','L']; //Sale
 arrayOrders2 = ['L','R','A','R','A','L']; //Dentro
@@ -39,9 +40,17 @@ orders;
 
 constructor( private helper:HelpersService) {
 
-helper.trip(this.arrayOrders,this.rover,this.mars);
+//helper.trip(this.arrayOrders,this.rover,this.mars);
+
 this.orientacion=this.rover.orientation;
 }
+    ngOnInit(): void {
+        this.helper.rover$.subscribe((res:Rover)=>{
+            console.log( 'RES FROM SUBSCRIBE', res );
+            this.rover=res;
+            
+            })
+    }
 
 getWidth(){
 console.log(this.width);
@@ -85,7 +94,7 @@ startTrip(){
     
     }
 
-
+   
 
 
 

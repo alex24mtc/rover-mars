@@ -1,11 +1,22 @@
 import { IfStmt } from '@angular/compiler';
 import { Injectable } from '@angular/core';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { Coordinates, Square,Rover } from '../interfaces/interfaces';
 
 @Injectable({
   providedIn: 'root'
 })
 export class HelpersService {
+  roverUpdated: Rover;
+
+  roverMovement = new BehaviorSubject( {
+    direction: 'R',
+    coordinates: { xWidth: 11, yHeight: 11 },
+    orientation: 'S',
+    successTrip: true
+    });
+    
+    public rover$: Observable< Rover | any > = this.roverMovement.asObservable(); // observable that will take care of the rover movement
 
   constructor() { }
 
@@ -189,6 +200,7 @@ changeOrientation( direction: 'L' | 'R' | 'A' , orientation: 'N' | 'S' | 'E' | '
     rover.orientation = this.changeOrientation(direction, rover.orientation) as 'N' | 'S' | 'W' | 'E'
     console.log('rover', rover);
     
+    
     return rover
     
     }else{
@@ -218,22 +230,37 @@ changeOrientation( direction: 'L' | 'R' | 'A' , orientation: 'N' | 'S' | 'E' | '
 
 async trip( directions: string[], rover: Rover, square: Square){
 
+ 
   // we use a promise to track all the steps since we add some delay effect
+
   let roverUpdated:Rover = rover;
+
+  // primera iteración tendra que pasar en el milisegundo 400
+  // segunda iteración tendra que pasar en el milisegundo 800
+  // tercera iteración tendra que pasar en el milisegundo 1200
+
+  if(rover.successTrip){
+
+    directions.forEach((direction: 'L' | 'R' | 'A', i )=>{
   
-  directions.forEach((direction: 'L' | 'R' | 'A' )=>{
+      setTimeout(()=>{
+        this.roverMovement.next( roverUpdated )
+       this.moveRover(rover,direction,square)
+        }, i*1000);
+        
+        
+      
+    });
   
-  if(roverUpdated.successTrip ){
-  roverUpdated = this.moveRover(roverUpdated, direction, square );
-  console.log('rover updated', roverUpdated);
-  
+      
+
   }else{
-  console.log('ME HE SALIDO DEL CUADRADO, EL ROVER ESTA EN', roverUpdated)
-  
+    return this.roverUpdated = rover; 
   }
-  
-  })
-  
+
+
+
+
 
 }
 

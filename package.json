@@ -10,7 +10,7 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "d":"ng build --prod && firebase deploy --only hosting"
+    "d": "ng build --prod && firebase deploy --only hosting"
   },
   "private": true,
   "dependencies": {
